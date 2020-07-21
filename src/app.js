@@ -1,5 +1,6 @@
 var app = require("express")();
-var http = require("http").createServer(app);
+// var http = require("http").createServer(app);
+var http = require("https").createServer(app);
 const io = require("socket.io")(http);
 const crypto = require("crypto");
 var cors = require("cors");
