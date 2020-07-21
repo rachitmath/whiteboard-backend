@@ -1,20 +1,32 @@
 var app = require("express")();
-var cors = require("cors");
-app.use(cors());
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
+// var cors = require("cors");
+// app.use(cors());
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   next();
+// });
+var http = require("http").createServer(app);
+// var server = app.listen(3000, () => {
+//   console.log("Server is listening on port: 3000");
+// });
+// // var http = require("https").createServer(app);
+// const io = require("socket.io").listen(server).origins("*:*");
+
+const io = require("socket.io")(http, {
+  handlePreflightRequest: (req, res) => {
+    const headers = {
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      "Access-Control-Allow-Origin": "*", //or the specific origin you want to give access to,
+      "Access-Control-Allow-Credentials": true,
+    };
+    res.writeHead(200, headers);
+    res.end();
+  },
 });
-// var http = require("http").createServer(app);
-var server = app.listen(3000, () => {
-  console.log("Server is listening on port: 3000");
-});
-// var http = require("https").createServer(app);
-const io = require("socket.io").listen(server).origins("*:*");
 
 io.set("origins", "*:*");
 
@@ -69,6 +81,6 @@ io.on("connection", (socket) => {
   });
 });
 
-// http.listen(app.get("port"), () => {
-//   console.log("listening on *:4000");
-// });
+http.listen(3000, () => {
+  console.log("listening on *:3000");
+});
