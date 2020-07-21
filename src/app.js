@@ -16,6 +16,8 @@ var server = app.listen(3000, () => {
 // var http = require("https").createServer(app);
 const io = require("socket.io").listen(server).origins("*:*");
 
+io.set("origins", "*:*");
+
 const rooms = [];
 var usernames = {};
 
