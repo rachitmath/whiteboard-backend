@@ -16,7 +16,7 @@ var http = require("http").createServer(app);
 // // var http = require("https").createServer(app);
 // const io = require("socket.io").listen(server).origins("*:*");
 
-const io = require("socket.io")(http, { origins: ["http://localhost:7500"] });
+const io = require("socket.io")(http);
 
 io.set("origins", "*:*");
 
