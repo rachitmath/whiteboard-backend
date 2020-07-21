@@ -10,16 +10,16 @@ var cors = require("cors");
 //   next();
 // });
 app.use(cors({ credentials: false, origin: true }));
-var http = require("http").createServer(app);
-// var server = app.listen(3000, () => {
-//   console.log("Server is listening on port: 3000");
-// });
+// var http = require("http").createServer(app);
+var server = app.listen(3000, () => {
+  console.log("Server is listening on port: 3000");
+});
 // // var http = require("https").createServer(app);
-// const io = require("socket.io").listen(server).origins("*:*");
+const io = require("socket.io").listen(server).origins("*:*");
 
-const io = require("socket.io")(http);
+// const io = require("socket.io")(http);
 
-io.set("origins", "*:*");
+// io.set("origins", "*:*");
 
 const rooms = [];
 var usernames = {};
@@ -72,6 +72,6 @@ io.on("connection", (socket) => {
   });
 });
 
-http.listen(3000, () => {
-  console.log("listening on *:3000");
-});
+// http.listen(3000, () => {
+//   console.log("listening on *:3000");
+// });
