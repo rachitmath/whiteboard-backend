@@ -1,14 +1,15 @@
 var app = require("express")();
 var cors = require("cors");
-app.use(cors());
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
+// app.use(cors());
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   next();
+// });
+app.use(cors({ credentials: false, origin: true }));
 var http = require("http").createServer(app);
 // var server = app.listen(3000, () => {
 //   console.log("Server is listening on port: 3000");
@@ -16,7 +17,7 @@ var http = require("http").createServer(app);
 // // var http = require("https").createServer(app);
 // const io = require("socket.io").listen(server).origins("*:*");
 
-const io = require("socket.io")(http, { origins: "*:*" });
+const io = require("socket.io")(http);
 
 io.set("origins", "*:*");
 
