@@ -58,7 +58,7 @@ io.on("connection", (socket) => {
 
   socket.on("draw-coordinates", function (data) {
     // console.log(data);
-    io.to(data.room).emit("draw", data);
+    io.emit("draw", data);
   });
 
   socket.on("disconnect", function () {
