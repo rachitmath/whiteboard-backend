@@ -9,9 +9,11 @@ app.use(function (req, res, next) {
   );
   next();
 });
+
+var port = process.env.PORT || 3000;
 // var http = require("http").createServer(app);
-var server = app.listen(3000, () => {
-  console.log("Server is listening on port: 3000");
+var server = app.listen(port, () => {
+  console.log("Server is listening on port: " + port);
 });
 // // var http = require("https").createServer(app);
 const io = require("socket.io").listen(server);
