@@ -2,6 +2,12 @@ var app = require("express")();
 var http = require("http").createServer(app);
 const io = require("socket.io")(http);
 const crypto = require("crypto");
+var cors = require("cors");
+
+var app = express();
+
+app.use(cors());
+app.set("port", process.env.PORT || 4000);
 
 // app.get("/", (req, res) => {
 //   res.send("<h1>Hello world</h1>");
@@ -57,6 +63,6 @@ io.on("connection", (socket) => {
   });
 });
 
-http.listen(4000, () => {
+http.listen(app.get("port"), () => {
   console.log("listening on *:4000");
 });
