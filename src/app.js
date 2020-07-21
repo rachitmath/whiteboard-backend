@@ -5,8 +5,6 @@ const io = require("socket.io")(http);
 const crypto = require("crypto");
 var cors = require("cors");
 
-var app = express();
-
 app.use(cors());
 app.set("port", process.env.PORT || 4000);
 
