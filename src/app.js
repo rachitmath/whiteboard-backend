@@ -14,14 +14,8 @@ var server = app.listen(3000, () => {
   console.log("Server is listening on port: 3000");
 });
 // var http = require("https").createServer(app);
-const io = require("socket.io").listen(server);
-const crypto = require("crypto");
+const io = require("socket.io").listen(server).origins("*:*");
 
-app.set("port", process.env.PORT || 4000);
-
-// app.get("/", (req, res) => {
-//   res.send("<h1>Hello world</h1>");
-// });
 const rooms = [];
 var usernames = {};
 
