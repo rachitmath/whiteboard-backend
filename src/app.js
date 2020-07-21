@@ -1,5 +1,5 @@
 var app = require("express")();
-// var cors = require("cors");
+var cors = require("cors");
 // app.use(cors());
 // app.use(function (req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "*");
@@ -9,6 +9,7 @@ var app = require("express")();
 //   );
 //   next();
 // });
+app.use(cors({ credentials: false, origin: true }));
 var http = require("http").createServer(app);
 // var server = app.listen(3000, () => {
 //   console.log("Server is listening on port: 3000");
