@@ -1,7 +1,10 @@
 var app = require("express")();
-var http = require("http").createServer(app);
+// var http = require("http").createServer(app);
+var server = app.listen(3000, () => {
+  console.log("Server is listening on port: 3000");
+});
 // var http = require("https").createServer(app);
-const io = require("socket.io")(http);
+const io = require("socket.io").listen(server);
 const crypto = require("crypto");
 var cors = require("cors");
 
@@ -72,15 +75,6 @@ io.on("connection", (socket) => {
   });
 });
 
-http.listen(app.get("port"), () => {
-  app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept-Type"
-    );
-    res.header("Access-Control-Allow-Credentials", "true");
-    next();
-  });
-  console.log("listening on *:4000");
-});
+// http.listen(app.get("port"), () => {
+//   console.log("listening on *:4000");
+// });
